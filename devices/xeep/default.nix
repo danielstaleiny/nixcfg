@@ -28,7 +28,12 @@ in {
 
   # newer kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.extraModulePackages = [ config.boot.kernelPackages.wireguard ];
+  boot.extraModulePackages = [
+    config.boot.kernelPackages.wireguard # err, why (is this to get it in, wihtout the module?)
+    # TODO: conflicts with the builtin one in tree
+    # TODO: maybe just patch the existing one
+    #pkgs.linuxPackages_latest.rtl8153
+  ];
 
   services.fwupd.enable = true;
 
